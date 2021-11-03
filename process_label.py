@@ -1,27 +1,28 @@
-import os, json
+import os, json, argparse
 
-label_dir = "./label"
-if not os.path.isdir(label_dir):
-    os.mkdir(label_dir)
-
-def main():
-    label_name = input("filename (or enter if in the same folder) : ")
-    label_raw = open("Label.txt", "r") if label_name == "" else open(label_name, "r")
+def main(args):
+    label_raw = open(args.label, "r")
     label_lines = label_raw.readlines()
+    lines = []
     for line in label_lines:
-        lines = []
         fname, data = line.split("\t")
-        data = json.loads(data)
-        fname = fname.split("/")[-1].split(".")[0] + ".txt"
-        print(fname)
-        for d in data:
-            cur_data = ""
-            cur_data += ",".join([str(i) for x in d['points'] for i in x])
-            cur_data += "," + d['transcription'].upper()
-            lines.append(cur_data)
-        with open("{}/{}".format(label_dir, fname), "w") as f:
-            f.write('\n'.join(lines))
+        if args.train:
+            fname = os.path.join("train", fname.split("/")[-1])
+        else:
+            fname = os.path.join("test", fname.split("/")[-1])
+        lines.append("{}\t{}".format(fname, data))
+    
+    with open(args.output, "w") as f:
+        f.write("".join(line for line in lines))
+        f.close()
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument("--label", type=str)
+    parser.add_argument("--output", type=str)
+    parser.add_argument("--train", action="store_true")
+
+    args = parser.parse_args()
+    main(args)
