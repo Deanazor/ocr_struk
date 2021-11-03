@@ -37,3 +37,6 @@ class Matching(object):
         if result[high] >= thresh:
             return self.templates[high]
         return s
+    
+    def extend(self, new_templates):
+        self.templates.extend(new_templates)
