@@ -16,8 +16,8 @@ def matching(dataset, input):
     #Iterate all templates and calculate text similarity
     jarowinkler = JaroWinkler()
     result=[jarowinkler.similarity(input.lower(), template.lower()) for template in templates]
+    
     #Prepare output
-
     prediction = templates[np.argmax(result)]
     confidence = result[np.argmax(result)]
     output = Output(prediction, confidence)
