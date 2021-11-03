@@ -1,6 +1,6 @@
 import cv2
 from .tuls import is_address, is_phone, is_item, remove_punc, is_prices
-from tmp_match.tmp_match import Matching
+from tmp_match.match import Matching
 
 def draw_level(image, levels, coords, scale=1):
     color = (255, 0, 0)

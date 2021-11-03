@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 import collections
+import csv
 from strsimpy.jaro_winkler import JaroWinkler
 
 Output = collections.namedtuple('Output', ['prediction', 'confidence'])
@@ -36,7 +37,11 @@ class Matching(object):
         high = np.argmax(result)
         if result[high] >= thresh:
             return self.templates[high]
-        return s
+        else:
+            with open('templates_indomaret.csv', 'a', encoding='UTF8', newline='') as f:
+                writer = csv.writer(f)
+                writer.writerow(s.title())
+            return s
     
     def extend(self, new_templates):
         self.templates.extend(new_templates)
