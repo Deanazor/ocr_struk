@@ -1,5 +1,7 @@
 git clone https://github.com/PaddlePaddle/PaddleOCR.git
 
+mkdir uploads
+
 pip install requirements.txt
 
 gdown --id 1o168_418wrcMOCxI8qBeaZT3nbDKbfU-
