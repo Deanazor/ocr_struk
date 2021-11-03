@@ -73,4 +73,3 @@ virtualenv==20.9.0
 visualdl==2.2.1
 Werkzeug==2.0.2
 strsimpy==0.2.1
-pandas==1.1.5

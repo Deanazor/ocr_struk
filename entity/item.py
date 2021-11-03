@@ -1,5 +1,6 @@
 import cv2
 from .tuls import is_address, is_phone, is_item, remove_punc, is_prices
+from tmp_match.tmp_match import Matching
 
 def draw_level(image, levels, coords, scale=1):
     color = (255, 0, 0)
@@ -65,6 +66,7 @@ def to_json(levels, transcripts):
                  "info": [],
                  "item" : []}
     item_keys = ['qty', 'name', 'price', 'total']
+    matcher = Matching("./tmp_match/template_indomaret.csv")
 
     for level in levels:
         info = True
@@ -106,8 +108,11 @@ def to_json(levels, transcripts):
                 responses["info"].append(inf)
     
 
-    for item in responses["item"]:
+    for i, item in enumerate(responses["item"]):
         if not item["name"]:
             responses["item"].remove(item)
-            
+        else :
+            item["name"] = matcher.match(item["name"])
+            responses["item"][i] = item
+
     return responses

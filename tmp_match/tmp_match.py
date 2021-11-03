@@ -23,3 +23,17 @@ def matching(dataset, input):
     output = Output(prediction, confidence)
     
     return output
+
+class Matching(object):
+    def __init__(self, dataset:str):
+        self.df = pd.read_csv(dataset)
+        self.templates = self.df["templates"].values.tolist()
+        self.algo = JaroWinkler()
+    
+    def match(self, s:str, thresh=0.8):
+        result  = [self.algo.similarity(s.lower(), template.lower()) for template in self.templates]
+
+        high = np.argmax(result)
+        if result[high] >= thresh:
+            return self.templates[high]
+        return s
