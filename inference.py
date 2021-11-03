@@ -52,9 +52,11 @@ def detection(args, text_detector):
         line = ",".join([str(int(i)) for x in box for i in x])
         save_pred.append(line)
 
-    with open(os.path.join(draw_img_save, "det_results.txt"), 'w') as f:
+    det_result = os.path.join(draw_img_save, "det_results.txt")
+    with open(det_result, 'w') as f:
         f.write('\n'.join(save_pred))
         f.close()
+    return det_result
 
 def crop_img(img, box):
     # Crop image
@@ -110,10 +112,11 @@ def recognition(args, text_recognizer):
         logger.info(E)
         exit()
 
-    with open(os.path.join(draw_img_save, "rec_result.txt"), "w") as f:
+    rec_result = os.path.join(draw_img_save, "rec_result.txt")
+    with open(rec_result, "w") as f:
         f.write('\n'.join(list(["{}".format(res[0]) for res in rec_res])))
         f.close()
-
+    return rec_result
 
 if __name__ == "__main__":
     args = parse_args()

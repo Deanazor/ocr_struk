@@ -39,7 +39,7 @@ def text_to_img(img, levels, coords_data, transcripts):
 def main(args):
     coord_path = args.coord_path
     transcript_path = args.transcript_path
-    img_path = args.img_path
+    img_path = args.image_path
     second = 1000
 
     img = cv2.imread(img_path)
@@ -59,7 +59,7 @@ def main(args):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
 
-    parser.add_argument("--img_path", type=str)
+    parser.add_argument("--image_path", type=str)
     parser.add_argument("--coord_path", type=str, default="./inference_results/det_results.txt")
     parser.add_argument("--transcript_path", type=str, default="./inference_results/rec_result.txt")
     parser.add_argument("--json_path", type=str, default="./inference_results/json_results.json")
