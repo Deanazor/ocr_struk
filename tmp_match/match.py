@@ -3,7 +3,7 @@ import pandas as pd
 import collections
 import csv
 from strsimpy.jaro_winkler import JaroWinkler
-
+from tmp_match.load import save
 Output = collections.namedtuple('Output', ['prediction', 'confidence'])
 
 def matching(dataset, input):
@@ -26,9 +26,9 @@ def matching(dataset, input):
     return output
 
 class Matching(object):
-    def __init__(self, dataset:str):
-        self.df = pd.read_csv(dataset)
-        self.templates = self.df["templates"].values.tolist()
+    def __init__(self, df):
+        # self.df = pd.read_csv(dataset)
+        self.templates = df["templates"].values.tolist()
         self.algo = JaroWinkler()
     
     def match(self, s:str, thresh=0.8):
@@ -38,10 +38,9 @@ class Matching(object):
         if result[high] >= thresh:
             return self.templates[high]
         else:
-            with open('templates_indomaret.csv', 'a', encoding='UTF8', newline='') as f:
-                writer = csv.writer(f)
-                writer.writerow(s.title())
+            self.templates.append(s)
             return s
     
-    def extend(self, new_templates):
-        self.templates.extend(new_templates)
+    def extend(self):
+        df_update = pd.DataFrame(data=self.templates, columns=['templates'])
+        save(df_update, 'dataset/processed/ocr-struk/template-matching/template_indomaret.csv')

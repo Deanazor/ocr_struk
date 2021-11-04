@@ -1,6 +1,7 @@
 import cv2
 from .tuls import is_address, is_phone, is_item, remove_punc, is_prices
 from tmp_match.match import Matching
+from tmp_match.load import load
 
 def draw_level(image, levels, coords, scale=1):
     color = (255, 0, 0)
@@ -75,7 +76,8 @@ def to_json(levels, transcripts):
                  "info": [],
                  "item" : []}
     item_keys = ['qty', 'name', 'price', 'total']
-    matcher = Matching("./tmp_match/template_indomaret.csv")
+    dataset = load('dataset/processed/ocr-struk/template-matching/template_indomaret.csv')
+    matcher = Matching(dataset)
 
     for level in levels:
         info = True
@@ -123,5 +125,6 @@ def to_json(levels, transcripts):
         else :
             item["name"] = matcher.match(item["name"])
             responses["item"][i] = item
-
+    matcher.extend()
+    
     return responses
