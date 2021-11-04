@@ -70,14 +70,15 @@ def find_item(level, transcripts):
 
     return qty, name, pprice, price
 
-def to_json(levels, transcripts):
+def to_json(levels, transcripts, template:list=None):
     responses = {"address" : None,
                  "number" : None,
                  "info": [],
                  "item" : []}
     item_keys = ['qty', 'name', 'price', 'total']
-    dataset = load('dataset/processed/ocr-struk/template-matching/template_indomaret.csv')
-    matcher = Matching(dataset)
+    matcher = Matching("./tmp_match/template_indomaret.csv")
+    if template :
+        matcher.extend(template)
 
     for level in levels:
         info = True
@@ -126,5 +127,4 @@ def to_json(levels, transcripts):
             item["name"] = matcher.match(item["name"])
             responses["item"][i] = item
     matcher.extend()
-    
     return responses
