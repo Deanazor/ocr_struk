@@ -25,7 +25,7 @@ def something(args, templates:list=None):
 
     return r_json
 
-@app.route("/predict", methods=["POST"])
+@app.route("/predict_img", methods=["POST"])
 def predict():
     file = request.files.get("image")
     if not file:
@@ -58,7 +58,7 @@ def base64_to_cv(uri):
     img = cv2.imdecode(arr, cv2.IMREAD_COLOR)
     return img
 
-@app.route("/predict_json", methods=["POST"])
+@app.route("/predict", methods=["POST"])
 def Predict():
     data = request.json
     # print(data)
