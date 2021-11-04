@@ -57,6 +57,15 @@ def find_item(level, transcripts):
         except Exception as e:
             print(e)
             print(lev)
+    
+    if not qty:
+        if pprice and price:
+            try :
+                temp_pprice = int(remove_punc(pprice, puncs=".,", replace=""))
+                temp_price = int(remove_punc(price, puncs=".,", replace=""))
+                qty = str(int(temp_price / temp_pprice))
+            except Exception:
+                pass
 
     return qty, name, pprice, price
 

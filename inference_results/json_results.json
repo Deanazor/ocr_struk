@@ -1,35 +1,89 @@
 {
-  "address": "JL.RE MARTADINATA RAYA RT.001 RW.05,1 15",
-  "number": "RE MARTADINATA 08118144003",
+  "address": null,
+  "number": "892000",
   "info": [
-    "NA",
-    "JAKARTA UTARA",
-    "RE MARTADINATA 08118144003",
-    "JL.RE MARTADINATA RAYA RT.001 RW.05,1 15",
-    "411",
-    "I.SAKU-POINKU-TRXID:TWIA2110071411400102",
-    "NO:xxxxxxxxx0867,PURCHASE:28.000",
-    "CEK PEROLEHAN POIN/STAMP/LUCKY DI APPS PDINKU",
-    "LAYANAN KONSUMEN SMS 0811 1500 280",
-    "CALL 1500200-KONTAKGINDOMARET.CO.I"
+    "892000",
+    "KRUKAH SURABAYA/004 08893069579",
+    "KRUKAH SELATAN 50 NGAGELREJO - SURABAYA 60",
+    "245, SURABAYA, 60245",
+    "TERIMA KASIH. SELAMAT BELANJA KEMBALI",
+    "LAYANAN KONSUMEN INDOMARET",
+    "SMS 0811 1500 280 CALL 1500 280",
+    "EMAIL:KONTAK@INDOMARET.CO.I"
   ],
   "item": [
     {
-      "qty": "1",
-      "name": "GILLETE CATR.VECTOR2",
-      "price": "26000",
-      "total": "26,000"
+      "qty": "2",
+      "name": "INDOMI GORENG SPC 80",
+      "price": "2300",
+      "total": "4,600"
     },
     {
       "qty": "1",
-      "name": "Xon-Ce Vitamin C-500Mg 6'S ",
-      "price": "2000",
-      "total": "2,000"
+      "name": "Sedaap Mie Instant Soto 75G",
+      "price": "2300",
+      "total": "2,300"
+    },
+    {
+      "qty": "2",
+      "name": "Indomie Mi Instan Kari Ayam 72G",
+      "price": "2300",
+      "total": "4,600"
+    },
+    {
+      "qty": "1",
+      "name": "Indomie Mi Instan Ayam Bawang 69G",
+      "price": "2300",
+      "total": "2,300"
+    },
+    {
+      "qty": "1",
+      "name": "SUKSES ISI2 A.KCP129",
+      "price": "3350",
+      "total": "3,350"
+    },
+    {
+      "qty": "1",
+      "name": "Indomie Mi Instan Goreng Rica Rica 85G",
+      "price": "2300",
+      "total": "2,300"
+    },
+    {
+      "qty": "1",
+      "name": "Sedaap Mie Instant Soto 75G",
+      "price": "2300",
+      "total": "2,300"
+    },
+    {
+      "qty": "1",
+      "name": "Sedaap Mie Instant Soto 77G",
+      "price": "2300",
+      "total": "2,300"
+    },
+    {
+      "qty": "1",
+      "name": "Indomaret Mix Nuts 80G",
+      "price": "2300",
+      "total": "2,300"
+    },
+    {
+      "qty": "1",
+      "name": "Sedaap Mie Instant Baso 72G",
+      "price": "2300",
+      "total": "2,300"
+    },
+    {
+      "qty": "1",
+      "name": "RINSO DET.MTC FRNT 3",
+      "price": "93,000",
+      "total": "93,000"
     }
   ],
-  "HARGA JUAL:": "28,000",
-  "TOTAL:": "28,000",
-  "NON TUNAI:": "28,000",
-  "PPN": "DPP=25,455 PPN=2,545",
-  "ID POINKU": "XXXXxXXx1106"
+  "HARGA JUAL": "121,650",
+  "VOUCHER UNILEVER INDONESIA PT.": "14,100)",
+  "TOTAL:": "107,550",
+  "TUNAI:": "110,000",
+  "KEMBALI:": "2,450",
+  "ANDA HEMAT": "14,100",
+  "PPN": "DPP= 110,591 PPN= 11,059"
 }
