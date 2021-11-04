@@ -4,7 +4,8 @@ from config import parse_args
 from inference import TextDetector, TextRecognizer, detection, recognition
 from draw import pair, to_json
 from datetime import datetime
-import os
+import numpy as np
+import os, cv2
 
 args = parse_args()
 
@@ -13,6 +14,15 @@ app.config['UPLOAD_FOLDER'] = "./uploads"
 
 detector = TextDetector(args)
 recognizer = TextRecognizer(args)
+
+def something(args, templates:list=None):
+    coord_path = detection(args, detector)
+    transcript_path = recognition(args, recognizer)
+
+    levels, _, transcripts = pair(coord_path, transcript_path)
+    r_json = to_json(levels, transcripts, templates)
+
+    return r_json
 
 @app.route("/predict", methods=["POST"])
 def predict():
@@ -36,12 +46,41 @@ def predict():
     args.image_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
     file.save(args.image_path)
     
-    coord_path = detection(args, detector)
-    transcript_path = recognition(args, recognizer)
+    r_json = something(args)
+    os.remove(args.image_path)
 
-    levels, _, transcripts = pair(coord_path, transcript_path)
-    r_json = to_json(levels, transcripts)
+    return jsonify(r_json)
 
+def base64_to_cv(data):
+    encoded_img = data.split(",")[1]
+    arr =  np.fromstring(encoded_img.decode('base64'), np.uint8)
+    img = cv2.imdecode(arr, cv2.IMREAD_COLOR)
+    return img
+
+@app.route("/predict_json", methods=["POST"])
+def Predict():
+    data = request.json
+
+    templates = data["additional_params"]["template"]
+    image = data["images"][0]
+    mimetype, base64 = image.split(";")
+
+    supported_mimetypes = ["image/jpeg"]
+    if mimetype not in supported_mimetypes:
+        return {
+                "error": "Unsupported image type"
+        }, 415
+    
+    img = base64_to_cv(base64)
+
+    current_time = datetime.now().strftime("%Y-%m-%d_%H:%M:%S")
+    filename = current_time + "-" + "pred.jpg"
+    filename = secure_filename(filename)
+
+    args.image_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+    cv2.imwrite(args.image_path, img)
+
+    r_json = something(args, templates)
     os.remove(args.image_path)
 
     return jsonify(r_json)

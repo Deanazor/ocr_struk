@@ -69,13 +69,15 @@ def find_item(level, transcripts):
 
     return qty, name, pprice, price
 
-def to_json(levels, transcripts):
+def to_json(levels, transcripts, template:list=None):
     responses = {"address" : None,
                  "number" : None,
                  "info": [],
                  "item" : []}
     item_keys = ['qty', 'name', 'price', 'total']
     matcher = Matching("./tmp_match/template_indomaret.csv")
+    if template :
+        matcher.extend(template)
 
     for level in levels:
         info = True
