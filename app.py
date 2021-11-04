@@ -4,6 +4,7 @@ from config import parse_args
 from inference import TextDetector, TextRecognizer, detection, recognition
 from draw import pair, to_json
 from datetime import datetime
+from base64 import b64decode
 import numpy as np
 import os, cv2
 
@@ -51,18 +52,19 @@ def predict():
 
     return jsonify(r_json)
 
-def base64_to_cv(data):
-    encoded_img = data.split(",")[1]
-    arr =  np.fromstring(encoded_img.decode('base64'), np.uint8)
+def base64_to_cv(uri):
+    encoded_data = uri.split(',')[1]
+    arr =  np.fromstring(b64decode(encoded_data), np.uint8)
     img = cv2.imdecode(arr, cv2.IMREAD_COLOR)
     return img
 
 @app.route("/predict_json", methods=["POST"])
 def Predict():
     data = request.json
+    # print(data)
 
     templates = data["additional_params"]["template"]
-    image = data["images"][0]
+    image = data["images"][0].split(":")[1]
     mimetype, base64 = image.split(";")
 
     supported_mimetypes = ["image/jpeg"]
